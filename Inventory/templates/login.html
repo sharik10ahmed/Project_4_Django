@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-md-5">
+
+        <div class="card shadow p-4 border-0">
+
+            <h2 class="text-center mb-4">
+                Login
+            </h2>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <!-- Toggle Buttons -->
+
+                <div class="text-center mb-4">
+
+                    <button type="button"
+                            class="btn btn-primary"
+                            id="usernameBtn">
+
+                        Username
+                    </button>
+
+                    <button type="button"
+                            class="btn btn-outline-primary"
+                            id="emailBtn">
+
+                        Email
+                    </button>
+
+                </div>
+
+                <!-- Hidden Input -->
+
+                <input type="hidden"
+                       name="login_type"
+                       id="login_type"
+                       value="username">
+
+                <!-- Username Field -->
+
+                <div class="mb-3"
+                     id="usernameField">
+
+                    <label class="form-label">
+                        Username
+                    </label>
+
+                    <input type="text"
+                           name="username"
+                           class="form-control">
+
+                </div>
+
+                <!-- Email Field -->
+
+                <div class="mb-3 d-none"
+                     id="emailField">
+
+                    <label class="form-label">
+                        Email
+                    </label>
+
+                    <input type="email"
+                           name="email"
+                           class="form-control">
+
+                </div>
+
+                <!-- Password -->
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Password
+                    </label>
+
+                    <input type="password"
+                           name="password"
+                           class="form-control">
+
+                </div>
+
+                <button type="submit"
+                        class="btn btn-success w-100">
+
+                    Login
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const usernameBtn = document.getElementById('usernameBtn');
+
+const emailBtn = document.getElementById('emailBtn');
+
+const usernameField = document.getElementById('usernameField');
+
+const emailField = document.getElementById('emailField');
+
+const loginType = document.getElementById('login_type');
+
+
+// USERNAME LOGIN
+
+usernameBtn.addEventListener('click', function(){
+
+    loginType.value = 'username';
+
+    usernameField.classList.remove('d-none');
+
+    emailField.classList.add('d-none');
+
+    usernameBtn.classList.remove('btn-outline-primary');
+
+    usernameBtn.classList.add('btn-primary');
+
+    emailBtn.classList.remove('btn-primary');
+
+    emailBtn.classList.add('btn-outline-primary');
+
+});
+
+
+// EMAIL LOGIN
+
+emailBtn.addEventListener('click', function(){
+
+    loginType.value = 'email';
+
+    emailField.classList.remove('d-none');
+
+    usernameField.classList.add('d-none');
+
+    emailBtn.classList.remove('btn-outline-primary');
+
+    emailBtn.classList.add('btn-primary');
+
+    usernameBtn.classList.remove('btn-primary');
+
+    usernameBtn.classList.add('btn-outline-primary');
+
+});
+
+</script>
+
+{% endblock %}
